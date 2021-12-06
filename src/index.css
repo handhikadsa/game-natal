@@ -12,3 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.clues {
+  display: flex;
+  justify-content: space-around;
+}
+
+.clues .direction {
+  padding: 0 10px;
+}
+
+.header {
+  color: white;
+  font-weight: bolder;
+}
+
+.clue {
+  color: orange;
+  font-size: 20px;
+}
+
+.clue.correct {
+  background-color: green;
+}
+
+.clue.correct {
+  color: white;
+}
