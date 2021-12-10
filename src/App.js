@@ -5,6 +5,9 @@ import { Modal } from 'react-bootstrap'
 const App = () => {
 
     const [modalWrongAnswer, setModalWrongAnswer] = useState(false)
+    const [modalCorrectAnswer, setModalCorrectAnswer] = useState(false)
+    const [correctAnswer, setCorrectAnswer] = useState("")
+    const [direction, setDirection] = useState("")
 
     const crossWordRef = useRef()
 
@@ -19,6 +22,20 @@ const App = () => {
             crossWordRef.current.fillAllAnswers()
         }
     }
+
+    const onCorrect = (direction, number, answer) => {
+
+        if(direction == "across") {
+            setDirection("Mendatar")
+        } else if (direction == "down") {
+            setDirection("Menurun")
+        }
+
+        setModalCorrectAnswer(true)
+        setCorrectAnswer(answer)
+    }
+
+    console.log("new direction: ", direction)
 
     const data = {
         across: {
@@ -39,7 +56,7 @@ const App = () => {
             26: { clue: 'you', answer: 'XXX', row: 7, col: 1 },
             27: { clue: 'can', answer: 'XXX', row: 7, col: 5 },
           },
-          down: {
+        down: {
             1: { clue: 'Buah yang dipotong-potong, diuleg campur gula jawa dan cabai, jadinya? Lorem ipsum dolor sit amet.', answer: 'XXXX', row: 0, col: 0 },
             2: { clue: 'All', answer: 'XXXX', row: 0, col: 1 },
             3: { clue: 'of', answer: 'XX', row: 0, col: 2 },
@@ -64,6 +81,7 @@ const App = () => {
             <Crossword 
                 ref={crossWordRef}
                 data={data}
+                onCorrect={onCorrect}
             />
 
             <div className="pe-5" style={{
@@ -84,6 +102,18 @@ const App = () => {
                 <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={() => setModalWrongAnswer(false)}>Tutup</button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal size="lg" centered show={modalCorrectAnswer} onHide={() => setModalCorrectAnswer(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>BENAR!!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h1>{correctAnswer}</h1>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="btn btn-secondary" onClick={() => setModalCorrectAnswer(false)}>Tutup</button>
                 </Modal.Footer>
             </Modal>
         </>
