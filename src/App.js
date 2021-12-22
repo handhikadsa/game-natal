@@ -1,6 +1,8 @@
 import Crossword from '@jaredreisinger/react-crossword';
 import { useState, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
+import useSound from 'use-sound';
+import sfx from './sound/sfx.mp3';
 
 const App = () => {
 
@@ -8,6 +10,12 @@ const App = () => {
     const [modalCorrectAnswer, setModalCorrectAnswer] = useState(false)
     const [correctAnswer, setCorrectAnswer] = useState("")
     const [direction, setDirection] = useState("")
+    const [play, { stop }] = useSound(sfx, {
+        sprite: {
+            wrong: [0, 1800],
+            correct: [2000, 6000],
+        }
+    }); 
 
     const crossWordRef = useRef()
 
@@ -24,7 +32,7 @@ const App = () => {
     }
 
     const onCorrect = (direction, number, answer) => {
-
+        play({ id: "correct" })
         if(direction == "across") {
             setDirection("Mendatar")
         } else if (direction == "down") {
@@ -89,23 +97,35 @@ const App = () => {
                 marginTop: -100
             }}>
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-danger me-5 px-4" onClick={() => setModalWrongAnswer(true)}>Salah</button>
+                    <button className="btn btn-danger me-5 px-4" onClick={() => {
+                        play({ id: "wrong" })
+                        setModalWrongAnswer(true)
+                    }}>Salah</button>
                     <button className="btn btn-secondary me-5 px-4" onClick={reset}>Reset</button>
                     <button className="btn btn-success me-5 px-4" onClick={fillAllAnswer}>Fill</button>
                 </div>
             </div>
 
-            <Modal size="lg" centered show={modalWrongAnswer} onHide={() => setModalWrongAnswer(false)}>
+            <Modal size="lg" centered show={modalWrongAnswer} onHide={() => {
+                play({ id: "wrong" })
+                setModalWrongAnswer(false)
+            }}>
                 <Modal.Header closeButton>
                     <Modal.Title>Salah!!!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-secondary" onClick={() => setModalWrongAnswer(false)}>Tutup</button>
+                    <button className="btn btn-secondary" onClick={() => {
+                        stop()
+                        setModalWrongAnswer(false)
+                    }}>Tutup</button>
                 </Modal.Footer>
             </Modal>
 
-            <Modal size="lg" centered show={modalCorrectAnswer} onHide={() => setModalCorrectAnswer(false)}>
+            <Modal size="lg" centered show={modalCorrectAnswer} onHide={() => {
+                stop()
+                setModalCorrectAnswer(false)
+            }}>
                 <Modal.Header closeButton>
                     <Modal.Title>BENAR!!</Modal.Title>
                 </Modal.Header>
@@ -113,7 +133,10 @@ const App = () => {
                     <h1>{correctAnswer}</h1>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-secondary" onClick={() => setModalCorrectAnswer(false)}>Tutup</button>
+                    <button className="btn btn-secondary" onClick={() => {
+                        stop()
+                        setModalCorrectAnswer(false)
+                    }}>Tutup</button>
                 </Modal.Footer>
             </Modal>
         </>
