@@ -28,8 +28,8 @@ code {
 }
 
 .clue {
-  /* color: #282c34; */
-  color: orange;
+  color: #282c34;
+  /* color: orange; */
   font-size: 22px;
   font-weight: bold;
 }
