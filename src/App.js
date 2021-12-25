@@ -9,7 +9,6 @@ const App = () => {
     const [modalWrongAnswer, setModalWrongAnswer] = useState(false)
     const [modalCorrectAnswer, setModalCorrectAnswer] = useState(false)
     const [correctAnswer, setCorrectAnswer] = useState("")
-    const [direction, setDirection] = useState("")
     const [play, { stop }] = useSound(sfx, {
         sprite: {
             wrong: [0, 1800],
@@ -33,26 +32,16 @@ const App = () => {
 
     const onCorrect = (direction, number, answer) => {
         play({ id: "correct" })
-        if(direction == "across") {
-            setDirection("Mendatar")
-        } else if (direction == "down") {
-            setDirection("Menurun")
-        }
-
         setModalCorrectAnswer(true)
         setCorrectAnswer(answer)
-    }
-    
-    const handleWrong = () => {
-        play({ id: "wrong" })
-        setModalWrongAnswer(true)
     }
 
     useEffect(() => {
         window.addEventListener("keydown", function(event) {
             // play({ id: "wrong" })            
             if(event.code === "Backslash") {
-                handleWrong()
+                // handleWrong()
+                document.getElementById("btnWrong").click()
             }
             // Consume the event so it doesn't get handled twice
             event.preventDefault();
@@ -74,6 +63,7 @@ const App = () => {
             10: { clue: 'Ikan bernapas di air dengan?', answer: 'TENANG', row: 14, col: 5 },
             11: { clue: 'Di dalam perpustakaan tidak boleh?', answer: 'BERAKSI', row: 21, col: 2 },
             12: { clue: 'Pantai tempat orang?', answer: 'RAMAI', row: 6, col: 11 },
+            14: { clue: 'Foto Bareng Teh Pucuk Keliatan mukanya semua?', answer: 'BENAR', row: 4, col: 18 },
             15: { clue: 'Rizky febian lahir di...', answer: 'GENDONG', row: 8, col: 13 },
           },
         down: {
@@ -90,7 +80,8 @@ const App = () => {
             21: { clue: 'Minum menggunakan apa?', answer: 'GELAS', row: 14, col: 10 },
             22: { clue: 'Ngecharge pakai apa?', answer: 'KABEL', row: 5, col: 14 },
             23: { clue: 'Foto Bareng Keliatan mukanya semua?', answer: 'BENAR', row: 11, col: 8 },
-        },
+            24: { clue: 'Foto Bareng Helm Keliatan mukanya semua?', answer: 'BENAR', row: 0, col: 22 },
+        }, // 25 soal
     };
 
     return (
@@ -105,11 +96,10 @@ const App = () => {
             />
 
             <div className="pe-5" style={{
-                opacity: 1,
-                marginTop: -100
+                marginTop: -100,
             }}>
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-danger me-5 px-4" onClick={() => {
+                    <button style={{opacity: 0}} id="btnWrong" className="btn btn-danger me-5 px-4" onClick={() => {
                         play({ id: "wrong" })
                         setModalWrongAnswer(true)
                     }}>Salah</button>
