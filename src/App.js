@@ -53,7 +53,6 @@ const App = () => {
 
     const data = {
         across: {
-            23: { clue: 'Contoh', answer: 'BENAR', row: 11, col: 8 },
             2: { clue: 'Burung terbang dengan?', answer: 'SEMAUNYA', row: 17, col: 3 },
             3: { clue: 'Api dipegang terasa?', answer: 'SUSAH', row: 18, col: 10 },
             6: { clue: 'Di rumah makan Padang, selain pakai sendok kita makan pakai?', answer: 'TENAGA', row: 4, col: 7 },
@@ -65,6 +64,7 @@ const App = () => {
             12: { clue: 'Pantai tempat orang?', answer: 'RAMAI', row: 6, col: 11 },
             14: { clue: 'Foto Bareng Teh Pucuk Keliatan mukanya semua?', answer: 'BENAR', row: 4, col: 18 },
             15: { clue: 'Rizky febian lahir di...', answer: 'GENDONG', row: 8, col: 13 },
+            23: { clue: 'Contoh', answer: 'BENAR', row: 11, col: 8 },
           },
         down: {
             4: { clue: 'Yang sering mendapat nilai 100 saat ulangan yaitu?', answer: 'KERTAS', row: 13, col: 6 },
