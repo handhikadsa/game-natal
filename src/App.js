@@ -91,7 +91,14 @@ const App = () => {
                 data={data}
                 onCorrect={onCorrect}
                 theme={{
-                    numberColor: 'black'
+                    numberColor: 'black',
+                    columnBreakpoint: '9999px',
+                    gridBackground: '#acf',
+                    // gridBackground: 'black',
+                    cellBackground: '#ffe',
+                    textColor: 'black',
+                    // focusBackground: '#f00',
+                    // highlightBackground: '#f99',
                 }}
             />
 

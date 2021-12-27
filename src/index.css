@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.grid {
+  min-width: 120rem !important;
+}
+
 .clues {
   display: flex;
   justify-content: space-around;
@@ -30,7 +34,7 @@ code {
 .clue {
   color: #282c34;
   /* color: orange; */
-  font-size: 22px;
+  font-size: 50px;
   font-weight: bold;
 }
 
